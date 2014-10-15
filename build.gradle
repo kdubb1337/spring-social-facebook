@@ -47,6 +47,8 @@ configure(allprojects - docProjects) {
         testCompile "org.springframework:spring-test:$springVersion"
     }
 
+
+
     ext.javadocLinks = [
         "http://docs.oracle.com/javase/7/docs/api/",
         "http://docs.oracle.com/javaee/7/api/",
@@ -182,6 +184,7 @@ project('spring-social-facebook') {
         compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
         testCompile ("org.springframework:spring-test:$springVersion")
     }
+    apply plugin: 'maven' // `gradle install` to push jars to local .m2 cache
 }
 
 project('spring-social-facebook-web') {
