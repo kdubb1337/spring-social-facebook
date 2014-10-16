@@ -35,7 +35,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getUserProfile_currentUser() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/me"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "me"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("full-profile"), MediaType.APPLICATION_JSON));
@@ -99,7 +99,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfile_specificUserByUserId() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile"), MediaType.APPLICATION_JSON));
@@ -110,7 +110,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfile_specificUserByUserId_noMiddleName() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile-no-middle-name"), MediaType.APPLICATION_JSON));
@@ -121,7 +121,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getUserProfile_specificUserByUserId_withRealTimezone() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile-with-timezone"), MediaType.APPLICATION_JSON));
@@ -133,7 +133,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getUserProfile_withAgeRange_13_17() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile-with-age-range-13-17"), MediaType.APPLICATION_JSON));
@@ -146,7 +146,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfile_withAgeRange_18_20() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile-with-age-range-18-20"), MediaType.APPLICATION_JSON));
@@ -159,7 +159,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfile_withAgeRange_21_plus() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile-with-age-range-21-plus"), MediaType.APPLICATION_JSON));
@@ -172,7 +172,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfile_withAgeRange_unknown() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile-with-age-range-unknown"), MediaType.APPLICATION_JSON));
@@ -185,7 +185,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfile_withAgeRange_null() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/123456789"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "123456789"))
 				.andExpect(method(GET))
 				.andExpect(header("Authorization", "OAuth someAccessToken"))
 				.andRespond(withSuccess(jsonResource("minimal-profile"), MediaType.APPLICATION_JSON));
@@ -198,7 +198,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfileImage() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/me/picture?type=normal"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "me/picture?type=normal"))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(new ClassPathResource("tinyrod.jpg", getClass()), MediaType.IMAGE_JPEG));
@@ -214,7 +214,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserProfileImage_specificUserByUserId() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/1234567/picture?type=normal"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "1234567/picture?type=normal"))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(new ClassPathResource("tinyrod.jpg", getClass()), MediaType.IMAGE_JPEG));
@@ -225,7 +225,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void getUserProfileImage_specificUserAndType() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/1234567/picture?type=large"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "1234567/picture?type=large"))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(new ClassPathResource("tinyrod.jpg", getClass()), MediaType.IMAGE_JPEG));
@@ -241,7 +241,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 
 	@Test
 	public void getUserPermissions() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/me/permissions"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "me/permissions"))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("user-permissions"), MediaType.APPLICATION_JSON));
@@ -260,7 +260,7 @@ public class UserTemplateTest extends AbstractFacebookApiTest {
 	
 	@Test
 	public void search() {
-		mockServer.expect(requestTo("https://graph.facebook.com/v2.0/search?q=Michael+Scott&type=user"))
+		mockServer.expect(requestTo(GraphApi.GRAPH_API_URL + "search?q=Michael+Scott&type=user"))
 			.andExpect(method(GET))
 			.andExpect(header("Authorization", "OAuth someAccessToken"))
 			.andRespond(withSuccess(jsonResource("user-references"), MediaType.APPLICATION_JSON));

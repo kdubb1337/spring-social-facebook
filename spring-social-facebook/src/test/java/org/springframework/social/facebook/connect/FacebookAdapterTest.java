@@ -23,6 +23,7 @@ import org.springframework.social.connect.ConnectionValues;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.GraphApi;
 import org.springframework.social.facebook.api.UserOperations;
 
 public class FacebookAdapterTest {
@@ -52,7 +53,7 @@ public class FacebookAdapterTest {
 		TestConnectionValues connectionValues = new TestConnectionValues();
 		apiAdapter.setConnectionValues(facebook, connectionValues);
 		assertEquals("Craig Walls", connectionValues.getDisplayName());
-		assertEquals("http://graph.facebook.com/v1.0/12345678/picture", connectionValues.getImageUrl());
+		assertEquals(GraphApi.GRAPH_API_URL + "12345678/picture", connectionValues.getImageUrl());
 		assertEquals("http://facebook.com/profile.php?id=12345678", connectionValues.getProfileUrl());
 		assertEquals("12345678", connectionValues.getProviderUserId());
 	}
