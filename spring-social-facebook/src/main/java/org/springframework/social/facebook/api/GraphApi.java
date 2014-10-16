@@ -23,6 +23,8 @@ import org.springframework.util.MultiValueMap;
  */
 public interface GraphApi {
 	
+	static final String GRAPH_API_URL = "https://graph.facebook.com/v2.1/";
+	
 	/**
 	 * Fetches an object, extracting it into the given Java type
 	 * Requires appropriate permission to fetch the object.
@@ -151,7 +153,4 @@ public interface GraphApi {
 	 * 			May be null if no namespace was specified.
 	 */
 	String getApplicationNamespace();
-	
-	static final String GRAPH_API_URL = "https://graph.facebook.com/v2.0/";
-
 }

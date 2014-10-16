@@ -91,6 +91,24 @@ class PageTemplate extends AbstractFacebookOperations implements PageOperations 
 		return graphApi.publish(albumId, "photos", parts);
 	}
 	
+	public String postPhoto(String pageId, Resource photo, String caption) {
+		requireAuthorization();
+		
+		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+		String pageAccessToken = getPageAccessToken(pageId);
+		parts.set("access_token", pageAccessToken);
+		
+		if(photo != null) {
+			parts.set("source", photo);
+		}
+		
+		if(caption != null) {
+			parts.set("message", caption);
+		}
+		
+		return graphApi.publish(pageId, "photos", parts);
+	}
+	
 	public PagedList<Page> search(String query) {
 		requireAuthorization();
 		MultiValueMap<String, String> queryMap = new LinkedMultiValueMap<String, String>();

@@ -112,6 +112,20 @@ public interface PageOperations {
 	String postPhoto(String pageId, String albumId, Resource photo, String caption);
 	
 	/**
+	 * Posts a photo to a page's album as the page administrator.
+	 * Requires that the application is granted "manage_pages" permission and that the authenticated user be an administrator of the page.
+	 * @param pageId the page ID
+	 * @param photo A {@link Resource} for the photo data. The given Resource must implement the getFilename() method (such as {@link FileSystemResource} or {@link ClassPathResource}).
+	 * @param caption A caption describing the photo.
+	 * @return the ID of the photo.
+	 * @throws ApiException if there is an error while communicating with Facebook.
+	 * @throws InsufficientPermissionException if the user has not granted "manage_pages" permission.
+	 * @throws PageAdministrationException if the user is not a page administrator.
+	 * @throws MissingAuthorizationException if FacebookTemplate was not created with an access token.
+	 */
+	String postPhoto(String pageId, Resource photo, String caption);
+	
+	/**
 	 * Searches for pages for places near a given coordinate.
 	 * @param query the search query (e.g., "Burritos")
 	 * @param latitude the latitude of the point to search near

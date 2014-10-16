@@ -22,6 +22,7 @@ import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UserProfileBuilder;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.FacebookProfile;
+import org.springframework.social.facebook.api.GraphApi;
 
 /**
  * Facebook ApiAdapter implementation.
@@ -43,7 +44,7 @@ public class FacebookAdapter implements ApiAdapter<Facebook> {
 		values.setProviderUserId(profile.getId());
 		values.setDisplayName(profile.getName());
 		values.setProfileUrl("http://facebook.com/profile.php?id=" + profile.getId());
-		values.setImageUrl("http://graph.facebook.com/v1.0/" + profile.getId() + "/picture");
+		values.setImageUrl(GraphApi.GRAPH_API_URL + profile.getId() + "/picture");
 	}
 
 	public UserProfile fetchUserProfile(Facebook facebook) {
