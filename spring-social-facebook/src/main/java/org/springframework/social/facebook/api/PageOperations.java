@@ -35,6 +35,8 @@ public interface PageOperations {
 	 */
 	Page getPage(String pageId);
 	
+	PagePicture getPagePicture(String pageId);
+	
 	/**
 	 * Checks whether the logged-in user for this session is an admin of the page with the given page ID.
 	 * Requires "manage_pages" permission.

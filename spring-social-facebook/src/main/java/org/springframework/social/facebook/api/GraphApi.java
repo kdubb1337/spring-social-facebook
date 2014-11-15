@@ -56,6 +56,10 @@ public interface GraphApi {
 	 * @return an Java object representing the requested Facebook object.
 	 */
 	<T> T fetchObject(String objectId, Class<T> type, MultiValueMap<String, String> queryParameters);
+	
+	<T> T fetchObjectSuffix(String objectId, String suffix, Class<T> type);
+	
+	<T> T fetchObjectSuffix(String objectId, String suffix, Class<T> type, MultiValueMap<String, String> queryParameters);
 
 	/**
 	 * Fetches connections, extracting them into a collection of the given Java type 

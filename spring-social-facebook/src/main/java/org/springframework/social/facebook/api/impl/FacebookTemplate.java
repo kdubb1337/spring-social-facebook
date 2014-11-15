@@ -212,6 +212,16 @@ public class FacebookTemplate extends AbstractOAuth2ApiBinding implements Facebo
 		return getRestTemplate().getForObject(uri, type);
 	}
 
+	public <T> T fetchObjectSuffix(String objectId, String suffix, Class<T> type) {
+		URI uri = URIBuilder.fromUri(GRAPH_API_URL + objectId + "/" + suffix).build();
+		return getRestTemplate().getForObject(uri, type);
+	}
+
+	public <T> T fetchObjectSuffix(String objectId, String suffix, Class<T> type, MultiValueMap<String, String> queryParameters) {
+		URI uri = URIBuilder.fromUri(GRAPH_API_URL + objectId + "/" + suffix).queryParams(queryParameters).build();
+		return getRestTemplate().getForObject(uri, type);
+	}
+	
 	public <T> PagedList<T> fetchConnections(String objectId, String connectionType, Class<T> type, String... fields) {
 		MultiValueMap<String, String> queryParameters = new LinkedMultiValueMap<String, String>();
 		if(fields.length > 0) {

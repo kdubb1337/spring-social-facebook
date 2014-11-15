@@ -15,6 +15,7 @@
  */
 package org.springframework.social.facebook.api.impl;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,7 @@ import org.springframework.social.facebook.api.GraphApi;
 import org.springframework.social.facebook.api.Page;
 import org.springframework.social.facebook.api.PageAdministrationException;
 import org.springframework.social.facebook.api.PageOperations;
+import org.springframework.social.facebook.api.PagePicture;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -41,6 +43,13 @@ class PageTemplate extends AbstractFacebookOperations implements PageOperations 
 
 	public Page getPage(String pageId) {
 		return graphApi.fetchObject(pageId, Page.class);
+	}
+	
+	public PagePicture getPagePicture(String pageId) {
+		MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<String, String>();
+		queryParams.put("redirect", Arrays.asList("false"));
+		
+		return graphApi.fetchObjectSuffix(pageId, "picture", PagePicture.class, queryParams);
 	}
 
 	public boolean isPageAdmin(String pageId) {
