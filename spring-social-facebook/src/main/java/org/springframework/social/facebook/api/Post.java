@@ -189,26 +189,21 @@ public class Post extends FacebookObject {
 	public static class Privacy {
 		
 		private String description;
-		
-		private Privacy value;
-		
-		private FriendsPrivacyType friends;
-		
+		private String value;
+		private String friends;
 		private String networks;
-		
 		private String allow;
-		
 		private String deny;
 		
 		public String getDescription() {
 			return description;
 		}
 		
-		public Privacy getValue() {
+		public String getValue() {
 			return value;
 		}
 		
-		public FriendsPrivacyType getFriends() {
+		public String getFriends() {
 			return friends;
 		}
 		
@@ -231,8 +226,10 @@ public class Post extends FacebookObject {
 	public static enum StatusType { MOBILE_STATUS_UPDATE, CREATED_NOTE, ADDED_PHOTOS, ADDED_VIDEO, SHARED_STORY, CREATED_GROUP, 
 		CREATED_EVENT, WALL_POST, APP_CREATED_STORY, PUBLISHED_STORY, TAGGED_IN_PHOTO, APPROVED_FRIEND, UNKNOWN }
 	
-	public static enum PrivacyType { EVERYONE, ALL_FRIENDS, FRIENDS_OF_FRIENDS, SELF, CUSTOM, UNKNOWN }
+	public static enum PrivacyType {
+		EVERYONE, ALL_FRIENDS, FRIENDS_OF_FRIENDS, SELF, CUSTOM, UNKNOWN;
+	}
 
-	public static enum FriendsPrivacyType { ALL_FRIENDS, FRIENDS_OF_FRIENDS, SOME_FRIENDS, UNKNOWN }
+	public static enum FriendsPrivacyType { ALL_FRIENDS, FRIENDS_OF_FRIENDS, SOME_FRIENDS }
 
 }
