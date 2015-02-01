@@ -30,6 +30,7 @@ import org.springframework.social.facebook.api.Photo;
 import org.springframework.social.facebook.api.Video;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 class MediaTemplate extends AbstractFacebookOperations implements MediaOperations {
@@ -178,9 +179,14 @@ class MediaTemplate extends AbstractFacebookOperations implements MediaOperation
 	public String postVideo(Resource video, String title, String description) {
 		requireAuthorization();
 		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
-		parts.set("file", video);
-		parts.set("title", title);
-		parts.set("description", description);
+		parts.set("source", video);
+		
+		if(!StringUtils.isEmpty(title))
+			parts.set("title", title);
+		
+		if(!StringUtils.isEmpty(description))
+			parts.set("description", description);
+		
 		Map<String, Object> response = restTemplate.postForObject("https://graph-video.facebook.com/me/videos", parts, Map.class);
 		return (String) response.get("id");
 	}

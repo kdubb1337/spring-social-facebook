@@ -312,5 +312,4 @@ public interface MediaOperations {
 	 * @throws MissingAuthorizationException if FacebookTemplate was not created with an access token.
 	 */
 	String postVideo(Resource video, String title, String description);
-
 }

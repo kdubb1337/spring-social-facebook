@@ -127,6 +127,8 @@ public interface PageOperations {
 	 */
 	String postPhoto(String pageId, Resource photo, String caption);
 	
+	String postVideo(String pageId, Resource video, String title, String description);
+	
 	/**
 	 * Searches for pages for places near a given coordinate.
 	 * @param query the search query (e.g., "Burritos")

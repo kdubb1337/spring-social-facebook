@@ -31,14 +31,18 @@ import org.springframework.social.facebook.api.PagePicture;
 import org.springframework.social.facebook.api.PagedList;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 class PageTemplate extends AbstractFacebookOperations implements PageOperations {
 
 	private final GraphApi graphApi;
+	private final RestTemplate restTemplate;
 
-	public PageTemplate(GraphApi graphApi, boolean isAuthorizedForUser) {
+	public PageTemplate(GraphApi graphApi, RestTemplate restTemplate, boolean isAuthorizedForUser) {
 		super(isAuthorizedForUser);
 		this.graphApi = graphApi;
+		this.restTemplate = restTemplate;
 	}
 
 	public Page getPage(String pageId) {
@@ -98,6 +102,27 @@ class PageTemplate extends AbstractFacebookOperations implements PageOperations 
 		}
 		parts.set("access_token", pageAccessToken);
 		return graphApi.publish(albumId, "photos", parts);
+	}
+	
+
+	
+	@SuppressWarnings("unchecked")
+	public String postVideo(String pageId, Resource video, String title, String description) {
+		requireAuthorization();
+		String pageAccessToken = getPageAccessToken(pageId);
+		MultiValueMap<String, Object> parts = new LinkedMultiValueMap<String, Object>();
+		parts.set("source", video);
+		
+		if(!StringUtils.isEmpty(title))
+			parts.set("title", title);
+		
+		if(!StringUtils.isEmpty(description))
+			parts.set("description", description);
+		
+		parts.set("access_token", pageAccessToken);
+		
+		Map<String, Object> response = restTemplate.postForObject("https://graph-video.facebook.com/" + pageId + "/videos", parts, Map.class);
+		return (String) response.get("id");
 	}
 	
 	public String postPhoto(String pageId, Resource photo, String caption) {
